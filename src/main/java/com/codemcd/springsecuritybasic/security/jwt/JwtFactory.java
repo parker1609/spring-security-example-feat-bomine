@@ -1,7 +1,8 @@
-package com.codemcd.springsecuritybasic.security;
+package com.codemcd.springsecuritybasic.security.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.codemcd.springsecuritybasic.security.AccountContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,6 +23,7 @@ public class JwtFactory {
         try {
             token = JWT.create()
                     .withIssuer("codemcd")
+                    .withClaim("USERNAME", context.getUsername())
                     .withClaim("USER_ROLE", authorities.get(0).getAuthority())
                     .sign(generateAlgorithm());
         } catch (Exception e) {

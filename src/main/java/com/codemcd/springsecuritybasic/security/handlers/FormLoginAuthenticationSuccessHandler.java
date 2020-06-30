@@ -2,7 +2,7 @@ package com.codemcd.springsecuritybasic.security.handlers;
 
 import com.codemcd.springsecuritybasic.dtos.TokenDto;
 import com.codemcd.springsecuritybasic.security.AccountContext;
-import com.codemcd.springsecuritybasic.security.JwtFactory;
+import com.codemcd.springsecuritybasic.security.jwt.JwtFactory;
 import com.codemcd.springsecuritybasic.security.tokens.PostAuthorizationToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

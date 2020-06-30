@@ -1,7 +1,8 @@
-package com.codemcd.springsecuritybasic.security;
+package com.codemcd.springsecuritybasic.security.jwt;
 
 import com.codemcd.springsecuritybasic.domain.Account;
 import com.codemcd.springsecuritybasic.domain.UserRole;
+import com.codemcd.springsecuritybasic.security.AccountContext;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
