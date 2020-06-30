@@ -3,7 +3,6 @@ package com.codemcd.springsecuritybasic.security.providers;
 import com.codemcd.springsecuritybasic.domain.Account;
 import com.codemcd.springsecuritybasic.domain.AccountRepository;
 import com.codemcd.springsecuritybasic.security.AccountContext;
-import com.codemcd.springsecuritybasic.security.AccountContextService;
 import com.codemcd.springsecuritybasic.security.tokens.PostAuthorizationToken;
 import com.codemcd.springsecuritybasic.security.tokens.PreAuthorizationToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +10,12 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import java.util.NoSuchElementException;
 
+@Component
 public class FormLoginAuthenticationProvider implements AuthenticationProvider {
-
-    @Autowired
-    private AccountContextService accountContextService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -29,10 +27,10 @@ public class FormLoginAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         PreAuthorizationToken token = (PreAuthorizationToken) authentication;
 
-        String username = token.getUserName();
+        String userId = token.getUserId();
         String password = token.getUserPassword();
 
-        Account account = accountRepository.findByUserId(username)
+        Account account = accountRepository.findByUserId(userId)
                 .orElseThrow(() -> new NoSuchElementException("해당 아이디는 존재하지 않습니다."));
 
         if (isVerifiedPassword(password, account)) {
@@ -49,6 +47,6 @@ public class FormLoginAuthenticationProvider implements AuthenticationProvider {
     }
 
     private boolean isVerifiedPassword(String password, Account account) {
-        return passwordEncoder.matches(account.getPassword(), password);
+        return passwordEncoder.matches(password, account.getPassword());
     }
 }

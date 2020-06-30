@@ -1,6 +1,7 @@
 package com.codemcd.springsecuritybasic.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -34,4 +35,12 @@ public class Account {
 
     @Column(name = "ACCOUNT_SOCIAL_PROFILEPIC")
     private String profileHref;
+
+    @Builder
+    public Account(String username, String userId, String password, UserRole userRole) {
+        this.username = username;
+        this.userId = userId;
+        this.password = password;
+        this.userRole = userRole;
+    }
 }
